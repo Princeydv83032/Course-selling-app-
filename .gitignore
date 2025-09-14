@@ -1,0 +1,24 @@
+# Node.js dependencies
+frontend/node_modules/
+backend/node_modules/
+
+# Logs
+logs
+*.log
+
+# Environment files
+frontend/.env
+backend/.env
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
+# Build/compiled output
+frontend/dist/
+frontend/build/
+backend/dist/
+backend/build/
+
+dist/
+build/
