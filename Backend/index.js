@@ -4,6 +4,9 @@ import mongoose from "mongoose";
 import courseRoute from "./routes/course.route.js";
 import { v2 as cloudinary } from "cloudinary";
 import fileUpload from "express-fileupload";
+import userRoute from "./routes/user.route.js";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
@@ -11,7 +14,22 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// ⚡ allow cookies across domains
+app.use(
+  cors({
+    origin: "http://localhost:5173", // your frontend URL
+    credentials: true,
+  })
+);
+
 app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
+
+// Routes
+app.use("/api/v1/course", courseRoute);
+app.use("/api/v1/user", userRoute);
+app.get("/", (req, res) => res.send("Backend server is running!"));
 
 // Cloudinary config
 cloudinary.config({
